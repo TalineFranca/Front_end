@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Magia Lilás</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/public/typescript.svg" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="visualizacao">
+        <img src="" alt="Imagem" />
+      </div>
+      <div class="selecao">
+        <label for="opcao">Escolha o animal:</label>
+        <select id="opcao" required>
+          <option value="" disabled selected>Selecione:</option>
+          <option value="Cat">Gato</option>
+          <option value="Dog">Cachorro</option>
+        </select>
+        <div class="botao">
+          <input type="submit" id="botao" value="Ver imagem" />
+        </div>
+      </div>
+    </div>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
