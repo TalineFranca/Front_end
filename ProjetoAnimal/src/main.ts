@@ -1,59 +1,53 @@
 import './style.css';
 
-const visualizacao = document.querySelector<HTMLDivElement>('.visualizacao')!;
-const imagem = visualizacao.querySelector<HTMLImageElement>('img')!;
-const selecao = document.querySelector<HTMLSelectElement>('#opcao')!;
-const botao = document.querySelector<HTMLInputElement>('#botao')!;
+const params = new URLSearchParams(window.location.search);
+const id = params.get("id");
 
-let imagemApi = '';
+const app = document.querySelector<HTMLDivElement>("#app")!;
 
-const apiCat = 'https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1';
-const apiDog = 'https://dog.ceo/api/breeds/image/random';
+const resultado = await fetch(`http://localhost:3000/usuarios/${id}`);
+const usuario = await resultado.json();
 
-async function carregarApi(api: string): Promise<string> {
-  try {
-    const resultado = await fetch(api);
-    if (!resultado.ok) throw new Error('Falha na requisição da API');
-    const recebido = await resultado.json();
-
-    if (api === apiCat) {
-      imagemApi = recebido[0].url;
-    } else {
-      imagemApi = recebido.message;
-    }
-
-    console.log('URL da imagem:', imagemApi);
-    return imagemApi;
-  } catch (error) {
-    console.error('Erro ao carregar a API:', error);
-    throw error;
-  }
+const container = document.createElement("div");
+container.className = "container";
+if (!usuario.fundo) {
+  container.style.backgroundImage = "none";
+  container.style.backgroundColor = "white";
+} else if (usuario.fundo.includes("gradient")) {
+  container.style.background = usuario.fundo;
+} else if (usuario.fundo.startsWith("/")) {
+  container.style.backgroundImage = `url(${usuario.fundo})`;
+  container.style.backgroundColor = "";
+} else {
+  container.style.backgroundColor = usuario.fundo;
 }
 
-async function obterFoto(api: string) {
-  try {
-    const url = await carregarApi(api);
-    imagem.src = url;
-    imagem.alt = `Imagem de ${selecao.value === 'Cat' ? 'Gato' : 'Cachorro'}`;
-  } catch (error) {
-    console.error('Erro ao obter a foto:', error);
-    alert('Não foi possível carregar a imagem. Tente novamente.');
-    imagem.src = '';
-  }
-}
-
-botao.addEventListener('click', () => {
-  const animalSelecionado = selecao.value;
-  if (!animalSelecionado) {
-    alert('Por favor, selecione um animal.');
-    return;
-  }
-  const apiUrl = animalSelecionado === 'Dog' ? apiDog : apiCat;
-  obterFoto(apiUrl);
-});
-
-selecao.innerHTML = `
-  <option value="" disabled selected></option>
-  <option value="Cat">Gato</option>
-  <option value="Dog">Cachorro</option>
+container.innerHTML = `
+  <div class="container-profile" style="color: ${usuario["cor-texto"]};">
+    <img src="${usuario.url_foto}" alt="Foto de ${usuario.nome}" />
+    <p style="color:${usuario["cor-nome"]}">${usuario.nome}</p>
+  </div>
+  <div class="container-links">
+    ${usuario.links.map((link: any) => `
+      <a href="${link.url}" target="_blank"
+          style="
+            background-color: ${usuario["cor-link"]};
+            border: 1px solid ${usuario["link-borda"]};
+            border-radius: ${usuario.border_radius};
+            color: ${usuario["cor-texto"]};
+          "
+          onmouseover="this.style.backgroundColor='${usuario["cor-link-hover"] || usuario["cor-link"]}';"
+          
+          onmouseout="this.style.backgroundColor='${usuario["cor-link"]}';"
+        >
+        <img src="${link.icone}" alt="${link.texto}" width="20" />
+        ${link.texto}
+      </a>
+    `).join("")}
+  </div>
+  <div class="container-qrcode">
+    <img src="${usuario.qr}" alt="QR Code de ${usuario.nome}" />
+  </div>
 `;
+
+app.appendChild(container);
