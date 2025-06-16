@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-texto: #202124;
+  --cor-fundo: #ffffff;
+  --cor-destaque: rgba(0, 0, 0, 0.1);
+  --cor-superficie: rgba(0, 0, 0, 0.05);
+  --cor-cartoes: #f9f9f9;
+  --sombra-cartoes: rgba(0, 0, 0, 0.1);
+  --switch-icone-url: url(/public/MoonStars.svg);
+}
+
+.dark {
+  --cor-texto: #fcfdfc;
+  --cor-fundo: #1e1e1e;
+  --cor-destaque: rgba(255, 255, 255, 0.5);
+  --cor-superficie: rgba(0, 0, 0, 0.05);
+  --cor-cartoes: #373636;
+  --sombra-cartoes: rgba(240, 244, 248, 0.1);
+  --switch-icone-url: url(/public/Sun.svg);
+}
+
+body {
+  background-color: var(--cor-fundo);
+  font-family: "Quicksand", sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.campo-obrigatorio::before {
+  content: "*";
+  color: #ff0000;
+  padding: 0 3px;
+}
+
+
+
+.form-cartoes {
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-titulo {
+  background: var(--cor-cartoes);
+  color: var(--cor-texto);
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 14px;
+  min-height: 180px;
+  position: relative;
+}
+
+.form-titulo-conteudo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.form-titulo-conteudo h2 {
+  font-size: 22px;
+  flex: 1;
+  font-weight: 600;
+}
+
+.data-prazo {
+  font-size: 14px;
+  color: var(--cor-texto);
+}
+
+.data-prazo strong {
+  font-weight: 700;
+}
+
+#switch {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#switch button {
+  width: 25px;
+  height: 25px;
+  background: white var(--switch-icone-url) no-repeat center;
+  border: 0;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 1;
+  transform: translateY(-50%);
+  animation: slide-back 0.2s;
+}
+
+.dark #switch button {
+  animation: slide-in 0.4s forwards;
+}
+
+#switch button:hover {
+  outline: 4px solid var(--cor-destaque);
+}
+
+#switch span {
+  display: block;
+  width: 45px;
+  height: 18px;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-destaque);
+  backdrop-filter: blur(4px);
+  border-radius: 9999px;
+}
+
+.form-conteudo {
+  background-color: var(--cor-cartoes);
+  padding: 20px;
+  border-left: 6px solid rgba(40, 107, 185, 1);
+  border-radius: 4px;
+  box-shadow: 0 1px 4px var(--sombra-cartoes);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.form-conteudo label {
+  font-weight: 600;
+  color: var(--cor-texto);
+  font-size: 14px;
+}
+
+input[type="text"],
+input[type="email"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  color: var(--cor-texto);
+  border: 1px solid #989898;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: var(--cor-fundo);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border: 2px solid #636262;
+  background-color: var(--cor-fundo);
+  box-shadow: 0 0 0 2px rgba(103, 58, 183, 0.2);
+  outline: none;
+}
+
+textarea {
+  resize: none;
+  min-height: 100px;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+input[type="submit"] {
+  background-color: rgba(40, 107, 185, 1);
+  color: #ffffff;
+  padding: 14px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+input[type="submit"]:hover {
+  background-color: rgb(20, 82, 152);
+}
+.aviso{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+@keyframes slide-in {
+  from {
+    left: 0;
+  }
+  to {
+    left: 50%;
+  }
+}
+
+@keyframes slide-back {
+  from {
+    left: 50%;
+  }
+  to {
+    left: 0;
+  }
+}
