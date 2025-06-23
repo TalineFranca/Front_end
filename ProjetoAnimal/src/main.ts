@@ -1,53 +1,50 @@
-import './style.css';
+import './style.css'
 
-const params = new URLSearchParams(window.location.search);
-const id = params.get("id");
+const quadradoImagem = document.querySelector<HTMLDivElement>('.foto-gerada')!
+const imagem = quadradoImagem.querySelector<HTMLImageElement>('img')!
+const selecao = document.querySelector<HTMLSelectElement>('#escolha')!
+const botao = document.querySelector<HTMLInputElement>('#botao')!
 
-const app = document.querySelector<HTMLDivElement>("#app")!;
+let imagemApi = '';
 
-const resultado = await fetch(`http://localhost:3000/usuarios/${id}`);
-const usuario = await resultado.json();
+const apiCat = 'https://api.thecatapi.com/v1/images/search?size=med&mime_types=jpg&format=json&has_breeds=true&order=RANDOM&page=0&limit=1';
+const apiDog = 'https://dog.ceo/api/breeds/image/random';
 
-const container = document.createElement("div");
-container.className = "container";
-if (!usuario.fundo) {
-  container.style.backgroundImage = "none";
-  container.style.backgroundColor = "white";
-} else if (usuario.fundo.includes("gradient")) {
-  container.style.background = usuario.fundo;
-} else if (usuario.fundo.startsWith("/")) {
-  container.style.backgroundImage = `url(${usuario.fundo})`;
-  container.style.backgroundColor = "";
-} else {
-  container.style.backgroundColor = usuario.fundo;
+async function carregarApi(api: string) {
+  const resultado = await fetch(api);
+  const recebido = await resultado.json();
+
+  if(api === apiCat) {
+    imagemApi = recebido[0].url;
+  } else {
+    imagemApi = recebido.message;
+  }
+
+  console.log(imagemApi);
+  return imagemApi;
 }
 
-container.innerHTML = `
-  <div class="container-profile" style="color: ${usuario["cor-texto"]};">
-    <img src="${usuario.url_foto}" alt="Foto de ${usuario.nome}" />
-    <p style="color:${usuario["cor-nome"]}">${usuario.nome}</p>
-  </div>
-  <div class="container-links">
-    ${usuario.links.map((link: any) => `
-      <a href="${link.url}" target="_blank"
-          style="
-            background-color: ${usuario["cor-link"]};
-            border: 1px solid ${usuario["link-borda"]};
-            border-radius: ${usuario.border_radius};
-            color: ${usuario["cor-texto"]};
-          "
-          onmouseover="this.style.backgroundColor='${usuario["cor-link-hover"] || usuario["cor-link"]}';"
-          
-          onmouseout="this.style.backgroundColor='${usuario["cor-link"]}';"
-        >
-        <img src="${link.icone}" alt="${link.texto}" width="20" />
-        ${link.texto}
-      </a>
-    `).join("")}
-  </div>
-  <div class="container-qrcode">
-    <img src="${usuario.qr}" alt="QR Code de ${usuario.nome}" />
-  </div>
-`;
+async function obterFoto(api: string) {
+  try{
+    const url = await carregarApi(api);
+    imagem.src = url;
+  } catch (error) {
+    console.log("Erro ao receber a imagem da api");
+  }
+}
 
-app.appendChild(container);
+botao.addEventListener('click', () => {
+  const animalRecebido =  selecao.value;
+  if(!animalRecebido) {
+    alert('Selecione algo.')
+    return;
+  }
+  const apiUrl = animalRecebido === 'Dog' ? apiDog : apiCat;
+  obterFoto(apiUrl);
+})
+
+selecao.innerHTML = `
+  <option value="" disabled selected>Selecione um animal:</option>
+  <option value="Cat">Gato</option>
+  <option value="Dog">Cachorro</option>
+`

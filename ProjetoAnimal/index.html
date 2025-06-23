@@ -2,28 +2,41 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Magia Lilás</title>
+    <title>CatDog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/public/typescript.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="container">
-      <div class="visualizacao">
-        <img src="" alt="Imagem" />
+    <div class="pagina">
+      <div class="titulo-principal">
+        <h1>Imagens CatDog</h1>
       </div>
-      <div class="selecao">
-        <label for="opcao">Escolha o animal:</label>
-        <select id="opcao" required>
-          <option value="" disabled selected>Selecione:</option>
-          <option value="Cat">Gato</option>
-          <option value="Dog">Cachorro</option>
-        </select>
-        <div class="botao">
-          <input type="submit" id="botao" value="Ver imagem" />
+      <div class="container">
+        <div class="foto-gerada"> 
+          <img src="" alt="">
+        </div>
+    
+        <div class="imagem">
+          <label for="escolha">Escolha sua Imagem:</label>
+          <select id="escolha" required>
+            <option value="" disabled selected>Selecione um animal:</option>
+            <option value="Cat">Gato</option>
+            <option value="Dog">Cachorro</option>
+          </select>
+
+          <div class="botao-selecionar">
+            <input type="submit" id="botao" value="Visualizar imagem" />
+          </div>
         </div>
       </div>
+      <div id="app"></div>
+      <script type="module" src="/src/main.ts"></script>
     </div>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
