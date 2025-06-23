@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pr-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=National+Park:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div id="app"></div>
+  <form class="formulario">
+    <div class="container-form">
+
+      <div class="container-1">
+        <div class="bloco-titulo">
+
+          <div class="bloco-info">
+            <h1>Inscrição nos cursos FIC</h1>
+            <p>Prazo para responder <strong>05/05/2025</strong></p>
+          </div>
+
+          <div class="img-tema">
+            <img src="public/noturno.svg" alt="icon-tema" class="img">
+          </div>
+        </div>
+      </div>
+
+      <div class="container-2">
+        <label for="nome">* Nome:</label>
+        <input type="text" placeholder="Ex. Maria de OLiveira" class="text">
+      </div>
+
+      <div class="container-3">
+        <label for="email">* Email:</label>
+        <input type="text" placeholder="Ex. maria.oliveia@gmail.com" class="text">
+      </div>
+
+      <div class="container-4">
+        <label for="sexo">* Sexo:</label>
+        <div class="grupo-radio">
+          <label class="opcao-radio">
+            <input type="radio" name="sexo" class="sexo">
+            <span class="custom-radio"></span>
+            Masculino
+          </label>
+          <label class="opcao-radio">
+            <input type="radio" name="sexo" class="sexo">
+            <span class="custom-radio"></span>
+            Feminino
+          </label>
+        </div>
+      </div>
+
+      <div class="container-5">
+        <label for="curso">* Curso:</label>
+        <select id="curso" class="selecione">
+          <option>Selecione uma opção</option>
+          <option>HTML e CSS</option>
+          <option>Git e GitHub</option>
+          <option>JavaScript</option>
+          <option>TypeScript</option>
+        </select>
+      </div>
+      <div class="container-6">
+        <label for="obs">Descreva o atendimento especial (opcional):</label>
+        <textarea id="obs" class="obs"></textarea>
+      </div>
+
+      <div class="container-7">
+        <label class="opcao-checkbox">
+          <input type="checkbox">
+          <span class="custom-checkbox"></span>
+          * Estou de acordo com o termos de serviço
+        </label>
+      </div>
+      <div>
+        <p>Os campo marcados com * são obrigatórios</p>
+      </div>
+      <div class="botao-click">
+        <button class="botao">Realizar Inscrição</button>
+      </div>
+    </div>
+  </form>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

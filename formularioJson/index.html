@@ -14,13 +14,12 @@
     />
   </head>
   <body>
-    <div class="form-cartoes">
+   <div class="form-cartoes">
       <div class="form-titulo">
         <h2>Formulário de inscrição para cursos FIC</h2>
-        <p>Prazo para responder:   <strong> 05/05/2025</strong></p>
+        <p>Prazo para responder: <strong>05/05/2025</strong></p>
         <div id="switch" onclick="toggleMode()">
-          <button>
-          </button>
+          <button></button>
           <span></span>
         </div>
       </div>
@@ -48,10 +47,10 @@
         <div class="form-conteudo">
           <label for="cursos" class="campo-obrigatorio">Curso:</label>
           <select id="cursos" required>
-              <option value="" disabled selected>Selecione um curso</option>
-              <option value="1">HTML e CSS</option>
-              <option value="2">JavaScript</option>
-              <option value="3">typescript</option>
+            <option value="" disabled selected>Selecione um curso</option>
+            <option value="1">HTML e CSS</option>
+            <option value="2">JavaScript</option>
+            <option value="3">Typescript</option>
           </select>
         </div>
 
@@ -73,6 +72,12 @@
           <input type="submit" value="Cadastrar" />
         </div>
       </form>
+
+      <div class="form-conteudo lista-usuarios">
+        <h3 class="titulo-lista">Usuários Inscritos</h3>
+        <button id="buscar-usuarios">Buscar Usuários</button>
+        <div id="listagem-usuarios"></div>
+      </div>
     </div>
     <script type="module" src="/src/main.ts"></script>
   </body>

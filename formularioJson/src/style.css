@@ -38,8 +38,6 @@ body {
   padding: 0 3px;
 }
 
-
-
 .form-cartoes {
   width: 100%;
   max-width: 640px;
@@ -190,9 +188,11 @@ input[type="submit"] {
 input[type="submit"]:hover {
   background-color: rgb(20, 82, 152);
 }
-.aviso{
-    padding-bottom: 20px;
-    padding-top: 20px;
+
+.aviso {
+  padding-bottom: 20px;
+  padding-top: 20px;
+  color: var(--cor-texto);
 }
 
 @keyframes slide-in {
@@ -211,4 +211,66 @@ input[type="submit"]:hover {
   to {
     left: 0;
   }
+}
+
+.lista-usuarios {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center; 
+  text-align: center; 
+  border: 1px solid rgba(40, 107, 185, 1); 
+}
+
+.lista-usuarios h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #4a4a4a; 
+  margin-bottom: 10px;
+   color: var(--cor-texto);
+}
+
+#buscar-usuarios {
+  background-color: rgba(40, 107, 185, 1);
+  color: #ffffff;
+  padding: 14px;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 200px;
+}
+
+#buscar-usuarios:hover {
+  background-color: rgb(20, 82, 152);
+}
+
+.usuarios-lista {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%; 
+  text-align: left; 
+}
+
+.usuario-item {
+  background-color: var(--cor-fundo);
+  padding: 15px;
+  border: 1px solid var(--cor-destaque);
+  border-radius: 4px;
+  color: var(--cor-texto);
+  width: 100%; 
+}
+
+.usuario-item p {
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.usuario-item p strong {
+  font-weight: 600;
 }
